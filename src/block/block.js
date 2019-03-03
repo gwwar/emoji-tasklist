@@ -8,14 +8,12 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, hasBlockSupport } from '@wordpress/blocks';
 import { createBlock } from '@wordpress/blocks';
-import {
-	addFilter,
-} from '@wordpress/hooks';
+import { addFilter } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
  */
-import WhiteHeavyCheckmarkIcon from './whiteHeavyCheckmarkIcon';
+import WhiteHeavyCheckmarkIcon from './white-heavy-checkmark-icon';
 import edit from './edit';
 
 /**
@@ -59,6 +57,12 @@ registerBlockType( 'gwwar/emoji-tasklist', {
 		],
 	},
 
+	styles: [
+		{ name: 'default', label: __( 'Checkbox' ), isDefault: true },
+		{ name: 'checkmark', label: __( 'Checkmark' ) },
+		{ name: 'sparkles', label: __( 'Sparkles' ) },
+	],
+
 	attributes: {
 		completed: {
 			type: 'array',
@@ -72,7 +76,7 @@ registerBlockType( 'gwwar/emoji-tasklist', {
 					default: false,
 				},
 			},
-			default: [ { completed: false } ],
+			default: [ false ],
 		},
 		tasks: {
 			type: 'array',
@@ -84,7 +88,7 @@ registerBlockType( 'gwwar/emoji-tasklist', {
 					source: 'html',
 				},
 			},
-			default: [ { task: '' } ]
+			default: [ '' ]
 		},
 	},
 	edit,
@@ -98,10 +102,11 @@ export function flattenAttributes( blockAttributes, blockType, innerHTML ) {
 	// to
 	// { completed: [ true ], tasks: [ '' ] }
 	if ( blockType.name === 'gwwar/emoji-tasklist' ) {
-		const { completed, tasks } = blockAttributes;
+		const { completed, tasks, ...rest } = blockAttributes;
 		return {
 			completed: completed.map( ( checkbox ) => checkbox.value ),
 			tasks: tasks.map( ( task ) => task.task ),
+			...rest,
 		}
 	}
 }

@@ -4,10 +4,16 @@
   align-items: center;
 }
 
+.wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-checkbox {
+  margin-top: -2px;
+}
+
 .wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-task {
   width: 100%;
 }
 
-.wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-task textarea:focus {
+.wp-block-gwwar-emoji-tasklist.is-selected textarea.wp-block-gwwar-emoji-tasklist-task:focus {
   outline: 0;
+  border: 0;
+  box-shadow: none;
 }

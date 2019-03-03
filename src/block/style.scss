@@ -4,3 +4,25 @@
   list-style: none;
   margin: 0;
 }
+
+.wp-block-gwwar-emoji-tasklist.is-style-checkmark li::before {
+  content: "📌";
+}
+
+.wp-block-gwwar-emoji-tasklist.is-style-checkmark li.is-completed::before {
+  content: "✅";
+}
+
+
+.wp-block-gwwar-emoji-tasklist.is-style-sparkles li::before {
+  content: "📦";
+}
+
+.wp-block-gwwar-emoji-tasklist.is-style-sparkles li.is-completed::before {
+  content: "✨";
+}
+
+.wp-block-gwwar-emoji-tasklist.is-style-checkmark .wp-block-gwwar-emoji-tasklist-checkbox,
+.wp-block-gwwar-emoji-tasklist.is-style-sparkles .wp-block-gwwar-emoji-tasklist-checkbox {
+  display: none;
+}

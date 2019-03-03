@@ -12,21 +12,21 @@ class EmojiTaskListEdit extends Component {
 	};
 
 	toList() {
-		const { attributes } = this.props;
+		const { attributes, className } = this.props;
 		const { tasks, completed } = attributes;
 
 		//className is not available in serialized this.props so infer the generation
-		const className = 'wp-block-gwwar-emoji-tasklist';
+		const base = 'wp-block-gwwar-emoji-tasklist';
 
 		return (
-			<ul className={ className }>
+			<ul className={ classnames( base, { [ className ]: className && className !== base } ) }>
 				{
 					tasks.map( ( task, index ) => {
 						const isCompleted = completed[ index ];
 						return (
-							<li key={ index } className={ classnames( `${ className }-item`, { 'is-completed': isCompleted, } ) }>
-								<input type="checkbox" checked={ isCompleted } className={ classnames( `${ className }-checkbox` ) } />
-								<span className={ classnames( `${ className }-task` ) }>{ task }</span>
+							<li key={ index } className={ classnames( `${ base }-item`, { 'is-completed': isCompleted, } ) }>
+								<input type="checkbox" checked={ isCompleted } className={ classnames( `${ base }-checkbox` ) } />
+								<span className={ classnames( `${ base }-task` ) }>{ task }</span>
 							</li>
 						);
 					} )
@@ -99,30 +99,37 @@ class EmojiTaskListEdit extends Component {
 		const { attributes, className } = this.props;
 		const { tasks, completed } = attributes;
 
+		//className is not available in serialized this.props so infer the generation
+		const base = 'wp-block-gwwar-emoji-tasklist';
+
 		return (
-			<ul className={ classnames( className, 'is-selected' ) }>
+			<ul className={ classnames( base, 'is-selected', { [ className ]: className && className !== base } ) }>
 				{
 					tasks.map( ( task, index ) => {
 						const isCompleted = completed[ index ];
 						return (
 							<li key={ index }
-							    className={ classnames( `${ className }-item`, { 'is-completed': isCompleted, } ) }>
+							    onClick={ ( event ) => {
+							    	if ( event.target.tagName.toLowerCase() === 'li' ) {
+									    this.toggleCheckbox( index )();
+								    }
+							    } }
+							    className={ classnames( `${ base }-item`, { 'is-completed': isCompleted, } ) }>
 								<input
 									type="checkbox"
 									checked={ isCompleted }
-									className={ classnames( `${ className }-checkbox` ) }
+									className={ classnames( `${ base }-checkbox` ) }
 									onChange={ this.toggleCheckbox( index ) }
 								/>
-								<span className={ classnames( `${ className }-task` ) }>
-										<PlainText
-											value={ task }
-											onChange={ this.updateTaskValue( index ) }
-											onKeyDown={ this.addOrRemoveTask( index ) }
-											placeholder={ __( 'Add a task…' ) }
-											aria-label={ __( 'Task List Item' ) }
-											autoFocus={ this.state.focusIndex === index }
-										/>
-								</span>
+								<PlainText
+									className={ classnames( `${ base }-task` ) }
+									value={ task }
+									onChange={ this.updateTaskValue( index ) }
+									onKeyDown={ this.addOrRemoveTask( index ) }
+									placeholder={ __( 'Add a task…' ) }
+									aria-label={ __( 'Task List Item' ) }
+									autoFocus={ this.state.focusIndex === index }
+								/>
 							</li>
 						);
 					} )
