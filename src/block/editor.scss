@@ -1,0 +1,13 @@
+.wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-task {
+  width: 100%;
+}
+
+.wp-block-gwwar-emoji-tasklist.is-selected .wp-block-gwwar-emoji-tasklist-task textarea:focus {
+  outline: 0;
+}
