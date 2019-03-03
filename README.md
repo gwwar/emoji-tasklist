@@ -3,7 +3,7 @@
 A simple block to add task lists with an emoji twist.
 
 ```
-✅ ~~A done task~~ 
+✅ A done task
 📌 Another task
 📌 Another task
 📌 Another task
